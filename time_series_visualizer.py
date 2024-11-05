@@ -3,7 +3,8 @@ import pandas as pd
 import seaborn as sns
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
-
+import numpy as np
+np.float = np.float64
 # Import data (Make sure to parse dates. Consider setting index column to 'date'.)
 df = pd.read_csv('fcc-forum-pageviews.csv', index_col='date', parse_dates=True)
 
@@ -31,11 +32,14 @@ def draw_bar_plot():
     df_bar['year'] = pd.DatetimeIndex(df_bar.index).year
     df_bar['month'] = pd.DatetimeIndex(df_bar.index).month
     df_bar = df_bar.groupby(['year', 'month']).agg({'value':'mean'}).round(0)
+    df_bar = df_bar.reset_index()
+    print(df_bar)
 
     # Draw bar plot
     fig, ax = plt.subplots(figsize=(16, 8) )
     labels=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    sns.barplot(x='year', y='value', hue='month', data=df_bar, legend="full", palette='bright');
+    # sns.barplot(data=df_bar, x='year', y='value', hue='month', legend="full", palette='bright');
+    sns.barplot(data=df_bar, x='year', y='value', hue='month', palette='bright');
     plt.ylabel('Average Page Views');
     plt.xlabel('Years')
     h, l = ax.get_legend_handles_labels()
