@@ -63,18 +63,16 @@ def draw_box_plot():
     fig, axes = plt.subplots(1, 2, figsize=(16, 8))
 
     axes[0].set_title('Year-wise Box Plot (Trend)')
-    axes[0].set_xlabel('Year')
-    axes[0].set_ylabel('Page Views')
-    sns.boxplot(x = 'year', y = 'value', data = df_box, hue='year', palette='bright', legend=None, ax=axes[0]) 
+    chart = sns.boxplot(x = 'year', y = 'value', data = df_box, palette='bright', ax=axes[0]) 
+    chart.set_xlabel('Year')
+    chart.set_ylabel('Page Views')
+    
     axes[1].set_title('Month-wise Box Plot (Seasonality)')
-    axes[1].set_xlabel('Month')
-    axes[1].set_ylabel('Page Views')
-
-    sns.boxplot(x='month', y='value', data = df_box, hue='month', palette='bright', legend=None, ax=axes[1], 
-                order = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                ) 
-
-
+    chart = sns.boxplot(x='month', y='value', data = df_box, palette='bright',  ax=axes[1], 
+                order = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']) 
+    chart.set_xlabel('Month')
+    chart.set_ylabel('Page Views')
+    
 
     # Save image and return fig (don't change this part)
     fig.savefig('box_plot.png')
