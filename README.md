@@ -1,3 +1,12 @@
 # Page View Time Series Visualizer
 
-This is the boilerplate for the Page View Time Series Visualizer project. Instructions for building your project can be found at https://www.freecodecamp.org/learn/data-analysis-with-python/data-analysis-with-python-projects/page-view-time-series-visualizer
+FreeCodeCamp Page View Time Series Visualizer project. 
+
+# line plot
+![line_plot](line_plot.png )
+
+# bar plot
+![bar_plot](bar_plot.png )
+
+# box plot
+![box_plot](box_plot.png )
