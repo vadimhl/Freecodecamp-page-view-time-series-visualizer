@@ -33,7 +33,7 @@ def draw_bar_plot():
     df_bar['month'] = pd.DatetimeIndex(df_bar.index).month
     df_bar = df_bar.groupby(['year', 'month']).agg({'value':'mean'}).round(0)
     df_bar = df_bar.reset_index()
-    print(df_bar)
+    #print(df_bar)
 
     # Draw bar plot
     fig, ax = plt.subplots(figsize=(16, 8) )
@@ -57,10 +57,22 @@ def draw_box_plot():
     df_box.reset_index(inplace=True)
     df_box['year'] = [d.year for d in df_box.date]
     df_box['month'] = [d.strftime('%b') for d in df_box.date]
-
+    # print(df_box)
     # Draw box plots (using Seaborn)
 
-    fig, ax = plt.subplots(figsize=(16, 8) )
+    fig, axes = plt.subplots(1, 2, figsize=(16, 8))
+
+    axes[0].set_title('Year-wise Box Plot (Trend)')
+    axes[0].set_xlabel('Year')
+    axes[0].set_ylabel('Page Views')
+    sns.boxplot(x = 'year', y = 'value', data = df_box, hue='year', palette='bright', legend=None, ax=axes[0]) 
+    axes[1].set_title('Month-wise Box Plot (Seasonality)')
+    axes[1].set_xlabel('Month')
+    axes[1].set_ylabel('Page Views')
+
+    sns.boxplot(x='month', y='value', data = df_box, hue='month', palette='bright', legend=None, ax=axes[1], 
+                order = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                ) 
 
 
 
